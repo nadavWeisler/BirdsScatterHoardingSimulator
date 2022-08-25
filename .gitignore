@@ -1,3 +1,6 @@
+__pycache__/
+components/__pycache__/
+
 # Logs
 logs
 *.log
@@ -102,3 +105,4 @@ dist
 
 # TernJS port file
 .tern-port
+__pycache__/app.cpython-310.pyc

@@ -1,5 +1,4 @@
 from PyQt6.QtWidgets import QFrame, QGridLayout, QWidget
-import numpy as np
 from utils import generate_matrix, getFakeAddress, getRandomBoardColor
 
 
@@ -7,7 +6,7 @@ class Map:
     def __init__(self) -> None:
         super().__init__()
         self.name = getFakeAddress()
-        self.matrix = generate_matrix()
+        self.matrix = generate_matrix(10, 20)
         self.board = Board(self.matrix)
 
 

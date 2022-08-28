@@ -106,3 +106,4 @@ dist
 # TernJS port file
 .tern-port
 __pycache__/app.cpython-310.pyc
+*.pyc

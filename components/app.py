@@ -1,12 +1,15 @@
 
-from PyQt6.QtWidgets import QDialog, QGridLayout, QPushButton, QWidget
-from PyQt6.QtGui import QIcon, QAction
-from PyQt6.QtCore import QSize
+from PyQt6.QtWidgets import QDialog, QGridLayout, QPushButton, QWidget, QLabel
+from PyQt6.QtGui import QIcon, QPixmap
+from PyQt6.QtCore import QSize, QPropertyAnimation, QPoint
 import numpy as np
 from components.bird import Bird
 from components.map import Map
 import os
 import sys
+
+from constants import BUTTON_LENGTH, ROW_BUTTON_HEIGHT, ROW_BUTTON_WIDTH
+
 
 class App(QDialog):
     def __init__(self):
@@ -78,11 +81,11 @@ class App(QDialog):
 
         existing_birds.append(randomNumber)
 
-        m1 = QPushButton(QIcon(
-            "icons/bird" + str(randomNumber) + ".png"), self.birds[0].getName())
+        m1 = QPushButton(
+            QIcon("icons/bird" + str(randomNumber) + ".png"), self.birds[0].getName())
         m1.clicked.connect(lambda: self.drawBirdHideplace(0))
-        m1.setFixedSize(200, 100)
-        m1.setIconSize(QSize(50, 50))
+        m1.setFixedSize(ROW_BUTTON_WIDTH, ROW_BUTTON_HEIGHT)
+        m1.setIconSize(QSize(BUTTON_LENGTH, BUTTON_LENGTH))
         m1.setStyleSheet("background-color: " + self.birds[0].getColor())
         self.layout.addWidget(m1, 0, 1)
 
@@ -94,8 +97,8 @@ class App(QDialog):
         m2 = QPushButton(QIcon(
             "icons/bird" + str(randomNumber) + ".png"), self.birds[1].getName())
         m2.clicked.connect(lambda: self.drawBirdHideplace(1))
-        m2.setFixedSize(200, 100)
-        m2.setIconSize(QSize(50, 50))
+        m2.setFixedSize(ROW_BUTTON_WIDTH, ROW_BUTTON_HEIGHT)
+        m2.setIconSize(QSize(BUTTON_LENGTH, BUTTON_LENGTH))
         m2.setStyleSheet("background-color: " + self.birds[1].getColor())
         self.layout.addWidget(m2, 0, 2)
 
@@ -106,8 +109,8 @@ class App(QDialog):
 
         m3 = QPushButton(QIcon(
             "icons/bird" + str(randomNumber) + ".png"), self.birds[2].getName())
-        m3.setFixedSize(200, 100)
-        m3.setIconSize(QSize(50, 50))
+        m3.setFixedSize(ROW_BUTTON_WIDTH, ROW_BUTTON_HEIGHT)
+        m3.setIconSize(QSize(BUTTON_LENGTH, BUTTON_LENGTH))
         m3.clicked.connect(lambda: self.drawBirdHideplace(2))
         m3.setStyleSheet("background-color: " + self.birds[2].getColor())
         self.layout.addWidget(m3, 0, 3)
@@ -118,8 +121,8 @@ class App(QDialog):
 
         m4 = QPushButton(QIcon(
             "icons/bird" + str(randomNumber) + ".png"), self.birds[3].getName())
-        m4.setFixedSize(200, 100)
-        m4.setIconSize(QSize(50, 50))
+        m4.setFixedSize(ROW_BUTTON_WIDTH, ROW_BUTTON_HEIGHT)
+        m4.setIconSize(QSize(BUTTON_LENGTH, BUTTON_LENGTH))
         m4.clicked.connect(lambda: self.drawBirdHideplace(3))
         m4.setStyleSheet("background-color: " + self.birds[3].getColor())
         self.layout.addWidget(m4, 0, 4)
@@ -128,22 +131,17 @@ class App(QDialog):
         mainButtonWidget = QWidget()
         currentLayout = QGridLayout()
         restartButton = QPushButton(QIcon("icons/restart.png"), "")
-        restartButton.clicked.connect(lambda: os.execl(sys.executable, sys.executable, *sys.argv))
+        restartButton.clicked.connect(lambda: os.execl(
+            sys.executable, sys.executable, *sys.argv))
         restartButton.setFixedSize(100, 100)
         restartButton.setIconSize(QSize(50, 50))
         currentLayout.addWidget(restartButton)
         mainButtonWidget.setLayout(currentLayout)
         self.layout.addWidget(mainButtonWidget, 0, 0)
-    
-    def getRefreshAction(self):
-        newAction = QAction(QIcon('restart.png'), '&Restart', self)        
-        newAction.setShortcut('F5')
-        newAction.triggered.connect(lambda: os.execl(sys.executable, sys.executable, *sys.argv))
-        return newAction
-        
+
     def initUI(self):
         self.setWindowTitle(self.title)
-        
+        self.setWindowIcon(QIcon('bird3.png'))
         self.layout = QGridLayout()
         self.addBirds()
         self.addMaps()

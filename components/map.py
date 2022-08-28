@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QFrame, QGridLayout, QWidget
-
-from utils import generate_matrix, getFakeAddress, rgb2hex
+import numpy as np
+from utils import generate_matrix, getFakeAddress, getRandomBoardColor
 
 
 class Map:
@@ -21,6 +21,7 @@ class Board(QFrame):
         self.draw_squares(matrix)
         self.setLayout(self.layout)
 
+
     def draw_squares(self, matrix):
         row_count = 0
         for row in matrix:
@@ -28,7 +29,7 @@ class Board(QFrame):
             for cell in row:
                 square = QWidget(self)
                 square.setStyleSheet(
-                    'background-color: ' + rgb2hex(cell, cell, cell))
+                    'background-color: ' + getRandomBoardColor(cell))
                 self.layout.addWidget(square, row_count, col_count)
                 col_count += 1
             row_count += 1

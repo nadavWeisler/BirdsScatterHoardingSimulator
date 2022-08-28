@@ -1,6 +1,8 @@
+from enum import Enum
 from random import choices
 from faker import Faker
 import numpy as np
+from math import floor
 
 
 def rgb2hex(r, g, b):
@@ -36,3 +38,17 @@ def bird_choise(mat, field_shape, key):
 def getRandomColor():
     randomColor = choices(range(256), k=3)
     return rgb2hex(randomColor[0], randomColor[1], randomColor[2])
+
+class Colors(Enum):
+    GreenBrown = 1
+    Blue = 2
+    
+def getRandomColorPalette():
+    return np.random.randint(1, 3)
+
+def getRandomBoardColor(value):
+    randomNumber = np.random.randint(1, 3)
+    if randomNumber == 1:
+        return rgb2hex(floor(value / 2.7), value, 0)
+    else:
+        return rgb2hex(value, floor(value / 2), 0)

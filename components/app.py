@@ -15,7 +15,7 @@ from constants import BUTTON_LENGTH, ROW_BUTTON_HEIGHT, ROW_BUTTON_WIDTH
 class App(QDialog):
     def __init__(self):
         super().__init__()
-        self.title = 'Food Locate Bird Simulator'
+        self.title = 'Scatter Hoarding Simulator'
         self.birds = [Bird(), Bird(), Bird(), Bird()]
         self.maps = [Map(), Map(), Map(), Map(), Map()]
         self.initUI()
@@ -160,7 +160,7 @@ class App(QDialog):
         self.setCurrentMap(0)
         self.addMainButtons()
         self.setLayout(self.layout)
-        myappid = 'foodlocatebird'
+        myappid = 'scatter.hoarding.birds.1.0'
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
         self.show()
  
